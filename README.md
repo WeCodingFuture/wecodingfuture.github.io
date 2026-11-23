@@ -1,5 +1,9 @@
 # site/ — wecodefuture.net (GitHub Pages)
 
+Studio home page (`index.html`: intro + apps/games list). Each product lives in its own folder (`/<app-id>/` with
+`index.html`, `privacy/`, `support/`). Operator: Cumhur Çetinkaya, individual developer (şahıs) trading as We Code Future.
+When changing `style.css`, bump the `?v=` query in every page.
+
 Published to the GitHub repo `wecodingfuture/wecodingfuture.github.io` (branch `main`, root).
 - `kiradefteri/privacy/` → AppConfig.privacyURL and App Store Connect "Privacy Policy URL"
 - `kiradefteri/support/` → App Store Connect "Support URL"
