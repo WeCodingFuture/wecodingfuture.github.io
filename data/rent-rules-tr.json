@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-11-23",
+  "source": "TÜİK",
+  "rates": [
+    { "month": "2026-11", "cpi12mAvg": 31.23, "publishedAt": "2026-11-03" }
+  ],
+  "rules": [
+    {
+      "id": "tr-pre-tbk-unsupported",
+      "scope": "any",
+      "validThrough": "2012-06-30",
+      "kind": "unsupported",
+      "legalBasis": {
+        "tr": "TBK m.648 (yürürlük 1.7.2012); öncesi 818 s. BK",
+        "en": "TBK Art. 648 (in force 1 Jul 2012); earlier: Code No. 818"
+      }
+    },
+    {
+      "id": "tr-tbk344-ppi",
+      "scope": "any",
+      "validFrom": "2012-07-01",
+      "validThrough": "2018-12-31",
+      "kind": "formula",
+      "formula": "ppiAnnualChange",
+      "legalBasis": {
+        "tr": "TBK m.344 (ilk metin, ÜFE)",
+        "en": "TBK Art. 344 (original text, PPI)"
+      }
+    },
+    {
+      "id": "tr-tbk344-cpi",
+      "scope": "any",
+      "validFrom": "2019-01-01",
+      "kind": "formula",
+      "formula": "cpi12mAvg",
+      "legalBasis": {
+        "tr": "TBK m.344 (7161 s. K. m.56)",
+        "en": "TBK Art. 344 (Law 7161 Art. 56)"
+      }
+    },
+    {
+      "id": "tr-cap25-residential-7409",
+      "scope": "residential",
+      "validFrom": "2022-06-11",
+      "validThrough": "2023-07-01",
+      "kind": "formula",
+      "formula": "min(cpi12mAvg, 25)",
+      "legalBasis": {
+        "tr": "TBK Geçici m.1 (7409/4)",
+        "en": "TBK Provisional Art. 1 (Law 7409 Art. 4)"
+      }
+    },
+    {
+      "id": "tr-cap25-residential-7456",
+      "scope": "residential",
+      "validFrom": "2023-07-02",
+      "validThrough": "2024-07-01",
+      "kind": "formula",
+      "formula": "min(cpi12mAvg, 25)",
+      "legalBasis": {
+        "tr": "TBK Geçici m.2 (7456/23)",
+        "en": "TBK Provisional Art. 2 (Law 7456 Art. 23)"
+      }
+    },
+    {
+      "id": "tr-merchant-deferral",
+      "scope": "commercial",
+      "validFrom": "2012-07-01",
+      "validThrough": "2020-06-30",
+      "kind": "noStatutoryCap",
+      "condition": "tenantIsMerchantOrLegalEntity",
+      "legalBasis": {
+        "tr": "6217 s. K. Geçici m.2 (6353/53)",
+        "en": "Law 6217 Provisional Art. 2 (Law 6353 Art. 53)"
+      }
+    }
+  ],
+  "notes": {
+    "tr": "Kural dönemleri sözleşmenin yenilenme tarihine göredir; tarihler dahildir. Oran, yenileme ayında TÜİK'in açıkladığı 12 aylık TÜFE ortalamasıdır (2019'dan itibaren). Dayanak: legal/rent-increase-tracker/rent-rules-legal-basis.md",
+    "en": "Rule periods are by the lease's renewal date; dates are inclusive. The rate is the 12-month CPI average TÜİK publishes in the renewal month (from 2019). Basis: legal/rent-increase-tracker/rent-rules-legal-basis.md"
+  }
+}
