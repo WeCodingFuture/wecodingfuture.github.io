@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>OG source</title>
+<!-- Source for the 1200x630 share images in /assets/img. Render: tools/README.md -->
+<link rel="stylesheet" href="/style.css?v=4">
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+.og{width:1200px;height:630px;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(circle at 88% 12%,rgba(124,242,196,.14),transparent 45%),var(--bg);border-bottom:6px solid var(--accent)}
+.og .brand{font-size:30px;gap:16px}
+.og h1{margin:0;font-family:var(--display);font-weight:800;font-size:84px;line-height:1;letter-spacing:-.03em}
+.og h1 span{color:var(--accent)}
+.og .foot{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:24px;color:var(--muted)}
+.og .app{display:flex;align-items:center;gap:36px}
+.og .app img{width:180px;height:180px;border-radius:40px}
+.og .app p{margin:14px 0 0;font-size:30px;line-height:1.4;color:var(--muted);max-width:760px}
+</style>
+</head>
+<body>
+<div class="og" id="og"></div>
+<script>
+const LOGO = '<svg width="44" height="44" viewBox="0 0 30 30"><rect x="1" y="1" width="28" height="28" rx="8" fill="none" stroke="#7CF2C4" stroke-width="2"/><path d="M10 10l-4 5 4 5M20 10l4 5-4 5" stroke="#7CF2C4" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="15" r="2" fill="#7CF2C4"/></svg>';
+const V = {
+  tr: {eyebrow: '// bağımsız iPhone stüdyosu', body: '<h1>Geleceği kodluyoruz.<br><span>Her seferinde tek bir uygulama.</span></h1>'},
+  en: {eyebrow: '// independent iPhone studio', body: '<h1>Coding the future.<br><span>One app at a time.</span></h1>'},
+  kiradefteri: {eyebrow: '● YAYINDA · App Store', body: '<div class="app"><img src="/assets/img/kiradefteri-icon.png" alt=""><div><h1>Kira Defteri</h1><p>TBK 344\'e göre kira artış üst sınırı hesaplama ve kira takibi.</p></div></div>'}
+};
+const v = V[new URLSearchParams(location.search).get('v') || 'tr'];
+document.getElementById('og').innerHTML =
+  '<div class="brand">' + LOGO + 'we code future</div>' + v.body +
+  '<div class="foot"><span class="accent">' + v.eyebrow + '</span><span>wecodefuture.net</span></div>';
+</script>
+</body>
+</html>
