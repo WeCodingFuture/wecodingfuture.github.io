@@ -42,9 +42,12 @@ def live_card(p, i, lang):
 
 def wip_card(p, i, lang):
     id_attr = f' id="{escape(p["id"])}"' if p.get("id") else ""
+    link = ""
+    if p.get("link"):  # optional: {"href": {"tr": ..., "en": ...}, "label": {"tr": ..., "en": ...}}
+        link = f'<a class="accent" href="{escape(p["link"]["href"][lang])}">{escape(p["link"]["label"][lang])} →</a>'
     return f"""<div class="placeholder"{id_attr}>
 <span class="idx">{i:02d}</span>
-<div class="placeholder-body"><strong>{escape(p['title'][lang])}</strong><span>{escape(p['text'][lang])}</span></div>
+<div class="placeholder-body"><strong>{escape(p['title'][lang])}</strong><span>{escape(p['text'][lang])}</span>{link}</div>
 <span class="status status-wip">{UI[lang]['wip']}</span>
 </div>"""
 

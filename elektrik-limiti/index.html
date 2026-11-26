@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elektrik limiti hesaplama: 2026 ve 2027 yıllık kWh limiti · Elektrik Limiti</title>
+<meta name="description" content="Mesken elektrik limiti 2026'da 4.000 kWh, 2027'de 3.000 kWh. Bu yılki tüketimini gir; limitin ne kadarı doldu, bu hızla hangi ay aşarsın, yüksek tarife hangi gün başlar, ücretsiz hesapla. Veri tarayıcında kalır.">
+<meta name="theme-color" content="#0A0E13">
+<!-- LAUNCH DAY: add <meta name="apple-itunes-app" content="app-id=APP_ID"> here. -->
+<link rel="canonical" href="https://wecodefuture.net/elektrik-limiti/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wecodefuture.net/elektrik-limiti/">
+<meta property="og:title" content="Elektrik limiti hesaplama: 2026 ve 2027 yıllık kWh limiti">
+<meta property="og:description" content="Limitin ne kadarı doldu, bu hızla hangi ay aşarsın, yüksek tarife hangi gün başlar? Ücretsiz, veri tarayıcında kalır.">
+<meta property="og:image" content="https://wecodefuture.net/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css?v=4">
+<style>
+/* Page-only styles for the calculator; everything else comes from /style.css. */
+.calc{display:grid;gap:16px;margin-top:20px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.field legend{font-size:14px;font-weight:600;color:var(--fg)}
+.field .hint{font-size:13px;color:var(--dim)}
+.field input,.field select{font:16px/1.4 var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--line-2);border-radius:10px;padding:12px 14px;width:100%}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.field fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:500;color:var(--muted);border:1px solid var(--line-2);border-radius:8px;padding:8px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.choices input{width:auto;accent-color:var(--accent)}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.calc .btn{border:0;cursor:pointer;font:600 16px/1.3 var(--sans);justify-self:start}
+.result{margin-top:24px;border-top:1px solid var(--line);padding-top:20px}
+.result[hidden]{display:none}
+.bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:8px 0 16px}
+.bar span{display:block;height:100%;background:var(--accent)}
+.bar.over span{background:var(--warn)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:8px 16px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;text-align:right;font-family:var(--mono);color:var(--fg)}
+.big{font-family:var(--display);font-size:clamp(28px,6vw,40px);font-weight:800;color:var(--fg);line-height:1.1}
+.callout{margin:16px 0 0;padding:14px 16px;border-radius:12px;background:var(--bg);border:1px solid var(--line-2)}
+.callout p{margin:4px 0}
+.callout .when{font-family:var(--display);font-size:20px;font-weight:700;color:var(--accent)}
+.callout.warn .when{color:var(--warn)}
+.error{color:var(--warn)!important}
+table.rule{width:100%;border-collapse:collapse;font-size:15px;color:var(--muted)}
+table.rule th,table.rule td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left}
+table.rule th{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<header class="wrap site-header">
+<a class="brand" href="/">
+<svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="8" fill="none" stroke="#7CF2C4" stroke-width="2"/><path d="M10 10l-4 5 4 5M20 10l4 5-4 5" stroke="#7CF2C4" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="15" r="2" fill="#7CF2C4"/></svg>
+we code future</a>
+<nav class="nav" aria-label="Language / Dil">
+<a href="#tr">/türkçe</a>
+<a href="#en">/english</a>
+</nav>
+</header>
+
+<main class="doc">
+
+<section class="doc-section" id="tr" lang="tr">
+<h1>Elektrik limiti hesaplama</h1>
+<p>Mesken aboneleri için yıllık elektrik limiti <strong>2026'da 4.000 kWh</strong>, <strong>2027'de 3.000 kWh</strong>. Bu yılki tüketimini gir; limitin ne kadarı doldu, kalan aylarda ayda kaç kWh kullanabilirsin, bu hızla hangi ay aşarsın ve yüksek tarife hangi gün başlar, hemen gör.</p>
+<p class="muted">Girdiğin sayılar yalnızca bu sayfada, tarayıcında hesaplanır. Sunucuya gönderilmez, kaydedilmez. Çerez ve analitik yok.</p>
+
+<form class="calc" id="calc" novalidate>
+<div class="field">
+<fieldset>
+<legend>Hangi yıl?</legend>
+<div class="choices">
+<label><input type="radio" name="year" value="2026"> 2026 · 4.000 kWh</label>
+<label><input type="radio" name="year" value="2027"> 2027 · 3.000 kWh</label>
+</div>
+</fieldset>
+</div>
+<div class="row2">
+<div class="field">
+<label for="used">Bu yıl şimdiye kadarki toplam tüketim (kWh)</label>
+<input id="used" name="used" type="text" inputmode="decimal" autocomplete="off" placeholder="ör. 2.150">
+<span class="hint">Faturalarındaki dönem tüketimlerinin toplamı. Yıl başlamadıysa 0 yaz.</span>
+</div>
+<div class="field">
+<label for="through">Bu toplam hangi ayın sonuna kadar?</label>
+<select id="through" name="through">
+<option value="0">Henüz veri yok (yıl başı)</option>
+<option value="1">Ocak</option><option value="2">Şubat</option><option value="3">Mart</option>
+<option value="4">Nisan</option><option value="5">Mayıs</option><option value="6">Haziran</option>
+<option value="7">Temmuz</option><option value="8">Ağustos</option><option value="9">Eylül</option>
+<option value="10">Ekim</option><option value="11">Kasım</option><option value="12">Aralık</option>
+</select>
+</div>
+</div>
+<div class="field">
+<label for="monthly">Son ay veya ortalama aylık tüketim (kWh)</label>
+<input id="monthly" name="monthly" type="text" inputmode="decimal" autocomplete="off" placeholder="ör. 280">
+<span class="hint">Tahmin için kullanılır: kalan her ay bu kadar tüketeceğin varsayılır.</span>
+</div>
+<div class="field">
+<fieldset>
+<legend>Daha önce yüksek tarifeye (son kaynak tedarik tarifesi) geçtin mi?</legend>
+<div class="choices">
+<label><input type="radio" name="prior" value="no" checked> Hayır</label>
+<label><input type="radio" name="prior" value="yes"> Evet</label>
+<label><input type="radio" name="prior" value="unknown"> Bilmiyorum</label>
+</div>
+</fieldset>
+</div>
+<button class="btn btn-primary" type="submit">Hesapla</button>
+</form>
+
+<div class="result" id="result" aria-live="polite" hidden></div>
+
+<h2>Kural ne diyor?</h2>
+<p>Limit, takvim yılı içindeki toplam tüketimdir. Limit 2026 veya 2027 takvim yılında aşılırsa, aşıldığı ayı izleyen üçüncü ayın başından itibaren yüksek tüketim tarifesi uygulanır.</p>
+<table class="rule">
+<thead><tr><th>Limitin aşıldığı ay</th><th>Yüksek tarife başlar</th></tr></thead>
+<tbody>
+<tr><td>Mayıs</td><td>1 Ağustos</td></tr>
+<tr><td>Ekim 2026</td><td>1 Ocak 2027</td></tr>
+<tr><td>Aralık 2027</td><td>1 Mart 2028</td></tr>
+</tbody>
+</table>
+<p>Daha önce yüksek tarifeye geçmiş aboneler için yeni aşımda yüksek tarife hemen başlar. Resmî adı: son kaynak tedarik tarifesi (yüksek tüketimli tüketiciler).</p>
+<p class="muted">Hesap basittir: kalan her ayın, girdiğin aylık tüketim kadar olacağı varsayılır. Kış ve yaz farkı hesaba katılmaz. Fatura dönemleri takvim aylarıyla birebir örtüşmeyebilir; aşım ayı bu yüzden tahminidir. 2026'da limiti aşanların 2027'deki durumu yüksek tariften çıkış kuralına bağlıdır; kesin bilgi için dağıtım şirketine danış.</p>
+
+<h2>Kaynaklar</h2>
+<ul>
+<li>2027 limiti, 3.000 kWh/yıl: EPDK Kurul Kararı 15005, Resmî Gazete 31.10.2026, sayı 33416, yürürlük 1.1.2027. <a href="https://www.resmigazete.gov.tr/eskiler/2026/10/20261031-9.pdf" rel="noopener">Resmî Gazete (PDF)</a></li>
+<li>2026 limiti, 4.000 kWh/yıl: EPDK Kurul Kararı 13912, Resmî Gazete 31.10.2025, sayı 33063. <a href="https://www.resmigazete.gov.tr/eskiler/2025/10/20251031-8.pdf" rel="noopener">Resmî Gazete (PDF)</a></li>
+<li>Üçüncü ay kuralı ve yeniden girişte "hemen" kuralı: Son Kaynak Tedarik Tarifesinin Düzenlenmesi Hakkında Tebliğ m.8(3), Resmî Gazete 20.01.2018, sayı 30307. <a href="https://www.resmigazete.gov.tr/eskiler/2018/01/20180120-26.htm" rel="noopener">Resmî Gazete</a></li>
+</ul>
+<p class="muted">Son kontrol: 26 Kasım 2026.</p>
+
+<h2>Her ay yeniden hesaplamak istemiyorsan</h2>
+<p><strong>Elektrik Limiti</strong> iPhone uygulaması: faturalarını kaydet, limitini ana ekran widget'ı ve bildirimlerle takip et. Hesap açman gerekmez, verilerin telefonunda kalır.</p>
+<!-- APP STORE BADGE: on launch day replace the paragraph below with
+     <div class="doc-actions"><a class="btn btn-light" href="https://apps.apple.com/app/idAPP_ID?ct=site-hesaplayici">App Store'dan indir</a><a href="/elektrik-limiti/support/#tr">Destek</a><a href="/elektrik-limiti/privacy/#tr">Gizlilik Politikası</a></div>
+     (do the same in the #en section with ct=site-calculator-en). -->
+<p class="muted">Uygulama henüz App Store'da değil. Yayımlandığında indirme bağlantısı bu alanda yer alacak.</p>
+<div class="doc-actions"><a href="/elektrik-limiti/support/#tr">Destek</a><a href="/elektrik-limiti/privacy/#tr">Gizlilik Politikası</a></div>
+
+<p class="muted">Bu hesaplayıcı ve Elektrik Limiti; EPDK'nın, Bakanlığın ya da bir dağıtım veya tedarik şirketinin hizmeti değildir ve onlarla bağlantısı yoktur. Hesaplar senin girdiğin sayılara dayanır ve bilgilendirme amaçlıdır. Kesin tespiti dağıtım şirketin yapar.</p>
+</section>
+
+<section class="doc-section" id="en" lang="en">
+<h1>Electricity Limit</h1>
+<p>In Türkiye, households on the residential tariff have a yearly electricity limit: <strong>4,000 kWh in 2026</strong> and <strong>3,000 kWh in 2027</strong>. If you reach it during the calendar year, the higher tariff starts on the first day of the third month after the month you reached it (for example May → 1 August; October 2026 → 1 January 2027; December 2027 → 1 March 2028). If you were on the higher tariff before, it starts immediately.</p>
+<p>The calculator above is in Turkish: pick the year, enter your total kWh so far, the month it covers and your usual monthly kWh. It shows the share of the limit used, kWh left, your monthly budget, the estimated month you would pass the limit and the date the higher tariff would start. Everything is calculated in your browser; nothing is sent or stored.</p>
+<p><strong>Electricity Limit</strong> for iPhone lets you log your bills and follow your limit with a Home Screen widget and notifications. It is not on the App Store yet; the download link will appear here when it is.</p>
+<!-- APP STORE BADGE (en): replace the paragraph above's last sentence and add the download button on launch day. -->
+<div class="doc-actions"><a href="/elektrik-limiti/support/#en">Support</a><a href="/elektrik-limiti/privacy/#en">Privacy Policy</a></div>
+<p class="muted">This calculator and Electricity Limit are not a service of EPDK, any ministry, or any electricity distributor or supplier, and are not affiliated with them. Results are based on the figures you enter and are for information only. Sources: Resmî Gazete <a href="https://www.resmigazete.gov.tr/eskiler/2026/10/20261031-9.pdf" rel="noopener">31.10.2026 (PDF)</a> and <a href="https://www.resmigazete.gov.tr/eskiler/2018/01/20180120-26.htm" rel="noopener">20.01.2018</a>.</p>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="wrap">
+<span>We Code Future, Cumhur Çetinkaya'nın bağımsız geliştirici olarak kullandığı stüdyo adıdır. / We Code Future is the studio name of independent developer Cumhur Çetinkaya. © 2026</span>
+<a class="mono" href="mailto:destek@wecodefuture.net">destek@wecodefuture.net</a>
+</div>
+</footer>
+
+<script src="/elektrik-limiti/hesap.js?v=1"></script>
+<script>
+(function () {
+  "use strict";
+  var EL = window.ElektrikLimiti;
+  var AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+  var form = document.getElementById("calc");
+  var out = document.getElementById("result");
+  var through = document.getElementById("through");
+  var today = new Date();
+
+  function num(n) { // Turkish grouping: 4.000
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  function pct(n) { return (Math.round(n * 10) / 10).toString().replace(".", ","); }
+  function ay(m) { return AYLAR[m.month - 1] + " " + m.year; }
+  function tarih(d) { return d.day + " " + AYLAR[d.month - 1] + " " + d.year; }
+  function gecmisMi(d) { return new Date(d.year, d.month - 1, d.day) <= today; }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function selectedYear() {
+    var r = form.querySelector('input[name="year"]:checked');
+    return r ? parseInt(r.value, 10) : null;
+  }
+
+  // Default year: the current one if it has a limit, else the nearest one we know.
+  var cy = today.getFullYear();
+  var defYear = EL.LIMITS[cy] ? cy : (cy < 2026 ? 2026 : 2027);
+  form.querySelector('input[name="year"][value="' + defYear + '"]').checked = true;
+  through.value = String(EL.defaultThroughMonth(defYear, today));
+  Array.prototype.forEach.call(form.querySelectorAll('input[name="year"]'), function (r) {
+    r.addEventListener("change", function () { through.value = String(EL.defaultThroughMonth(selectedYear(), today)); });
+  });
+
+  function showError(text) {
+    out.textContent = "";
+    out.appendChild(el("p", "error", text));
+    out.hidden = false;
+  }
+
+  function startLine(box, r, prior) {
+    var first = tarih(r.tariff);
+    var firstVerb = gecmisMi(r.tariff) ? "başladı" : "başlar";
+    if (prior === "yes") {
+      box.appendChild(el("p", null, "Daha önce yüksek tarifeye geçtiğin için yeni aşımda yüksek tarife hemen başlar:"));
+      box.appendChild(el("p", "when", r.tariffIsLatest ? "aşım ayında" : "aşım ayında (" + ay(r.crossMonth) + ")"));
+      return;
+    }
+    box.appendChild(el("p", null, (r.tariffIsLatest ? "Yüksek tarife en geç " : "Yüksek tarife ") + "bu tarihte " + firstVerb + ":"));
+    box.appendChild(el("p", "when", first));
+    if (prior === "unknown") {
+      box.appendChild(el("p", null, "Daha önce yüksek tarifeye geçtiysen: hemen, aşım ayında" + (r.tariffIsLatest ? "." : " (" + ay(r.crossMonth) + ").")));
+    }
+  }
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var year = selectedYear();
+    var used = EL.parseKwh(document.getElementById("used").value);
+    var mText = document.getElementById("monthly").value.trim();
+    var monthly = mText === "" ? undefined : EL.parseKwh(mText);
+    var prior = form.querySelector('input[name="prior"]:checked').value;
+    if (isNaN(used)) { showError("Toplam tüketimi kWh olarak yaz (ör. 2150). Yıl başlamadıysa 0 yaz."); return; }
+    if (monthly !== undefined && isNaN(monthly)) { showError("Aylık tüketimi kWh olarak yaz (ör. 280) ya da boş bırak."); return; }
+
+    var r = EL.calculate({ year: year, usedKwh: used, throughMonth: parseInt(through.value, 10), monthlyKwh: monthly, priorHigh: prior });
+    if (r.error === "monthForUsed") { showError("Toplam 0'dan büyükse hangi ayın sonuna kadar olduğunu seç."); return; }
+    if (r.error) { showError("Girdileri kontrol et."); return; }
+
+    out.textContent = "";
+    out.appendChild(el("p", null, year + " limiti: " + num(r.limit) + " kWh"));
+    out.appendChild(el("p", "big", "%" + pct(r.percent) + " doldu"));
+    var bar = el("div", "bar" + (r.status === "exceeded" ? " over" : ""));
+    var fill = el("span");
+    fill.style.width = Math.min(100, r.percent) + "%";
+    bar.appendChild(fill);
+    bar.setAttribute("aria-hidden", "true");
+    out.appendChild(bar);
+
+    var dl = el("dl", "kv");
+    function row(k, v) { dl.appendChild(el("dt", null, k)); dl.appendChild(el("dd", null, v)); }
+    row("Kullanılan", num(r.used) + " kWh");
+    row("Kalan", num(r.remaining) + " kWh");
+    if (r.monthlyBudget !== null) row("Kalan aylık bütçe (" + r.monthsLeft + " ay)", num(r.monthlyBudget) + " kWh/ay");
+    if (r.yearEndKwh !== null && r.status !== "underYearDone") row("Bu hızla yıl sonu (tahmini)", num(r.yearEndKwh) + " kWh");
+    out.appendChild(dl);
+
+    var box = el("div", "callout" + (r.status === "exceeded" || r.status === "willExceed" ? " warn" : ""));
+    if (r.status === "willExceed") {
+      box.appendChild(el("p", null, "Bu hızla limiti tahminen bu ay aşarsın:"));
+      box.appendChild(el("p", "when", ay(r.crossMonth)));
+      startLine(box, r, prior);
+    } else if (r.status === "exceeded") {
+      if (r.tariffIsLatest) {
+        box.appendChild(el("p", null, "Limiti aşmışsın. Hangi ayda aştığını faturalarından bulabilirsin; toplamın kapsadığı son ay " + ay(r.crossMonth) + "."));
+      } else {
+        box.appendChild(el("p", null, "Limiti aşmışsın. Aylık tüketimine göre tahmini aşım ayı:"));
+        box.appendChild(el("p", "when", ay(r.crossMonth)));
+      }
+      startLine(box, r, prior);
+    } else if (r.status === "under") {
+      box.appendChild(el("p", null, "Bu hızla yıl sonuna kadar limitin altında kalırsın."));
+    } else if (r.status === "underYearDone") {
+      box.appendChild(el("p", null, year + " yılını limitin altında kapattın."));
+    } else {
+      box.appendChild(el("p", null, "Aşım tahmini için son ay veya ortalama aylık tüketimini de yaz."));
+    }
+    out.appendChild(box);
+
+    var notes = el("p", "muted", "Tahminidir: kalan her ayın girdiğin aylık tüketim kadar olacağı varsayıldı. Kesin tespiti dağıtım şirketin yapar.");
+    out.appendChild(notes);
+    if (year === 2027) {
+      out.appendChild(el("p", "muted", "2026'da limiti aştıysan 2027'deki durumun yüksek tariften çıkış kuralına bağlıdır; kesin bilgi için dağıtım şirketine danış."));
+    }
+    out.hidden = false;
+  });
+})();
+</script>
+</body></html>

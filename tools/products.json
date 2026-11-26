@@ -1,31 +1,65 @@
 {
-  "_help": "Product log shown on / (tr) and /en/ (en). Order here = order on the page. Run `python3 tools/build.py` after editing. status: live | wip. Live products need slug, icon, appStoreId; wip entries only need title and text.",
+  "_help": "Product log shown on / (tr) and /en/ (en). Order here = order on the page. Run `python3 tools/build.py` after editing. status: live | wip. Live products need slug, icon, appStoreId; wip entries need title and text, optional id and link {href, label}.",
   "products": [
     {
       "status": "live",
       "slug": "kiradefteri",
       "icon": "/assets/img/kiradefteri-icon.png",
       "appStoreId": "6838456455",
-      "name": { "tr": "Kira Defteri", "en": "Rent Ledger" },
+      "name": {
+        "tr": "Kira Defteri",
+        "en": "Rent Ledger"
+      },
       "text": {
         "tr": "Kira artış üst sınırını TÜFE'ye göre hesaplar; sözleşmeler, ödemeler ve dekontlar tek yerde. Hesap yok, veriler cihazında.",
         "en": "Calculates the rent-increase cap from Türkiye's CPI; leases, payments and receipts in one place. No account, your data stays on your device."
       },
       "tags": {
-        "tr": ["iPhone", "Türkçe · English", "Her ay güncel oran"],
-        "en": ["iPhone", "Türkçe · English", "Rates updated monthly"]
+        "tr": [
+          "iPhone",
+          "Türkçe · English",
+          "Her ay güncel oran"
+        ],
+        "en": [
+          "iPhone",
+          "Türkçe · English",
+          "Rates updated monthly"
+        ]
       }
     },
     {
       "status": "wip",
-      "title": { "tr": "Sıradaki uygulama", "en": "Next app" },
-      "text": { "tr": "Araştırma ve tasarım aşamasında.", "en": "In research and design." }
+      "id": "elektrik-limiti",
+      "title": {
+        "tr": "Elektrik Limiti",
+        "en": "Electricity Limit"
+      },
+      "text": {
+        "tr": "Yıllık elektrik limitinin ne kadarı doldu, bu hızla hangi ay aşarsın, yüksek tarife hangi gün başlar. iPhone uygulaması geliştiriliyor; web hesaplayıcı şimdiden ücretsiz.",
+        "en": "How much of your yearly electricity limit is used, when you'd pass it at this pace and when the higher tariff would start. iPhone app in development; the web calculator is free now."
+      },
+      "link": {
+        "href": {
+          "tr": "/elektrik-limiti/",
+          "en": "/elektrik-limiti/#en"
+        },
+        "label": {
+          "tr": "Ücretsiz hesapla",
+          "en": "Free calculator"
+        }
+      }
     },
     {
       "status": "wip",
       "id": "oyunlar",
-      "title": { "tr": "İlk oyun", "en": "First game" },
-      "text": { "tr": "Kısa molalar için, adil ve eğlenceli.", "en": "For short breaks, fair and fun." }
+      "title": {
+        "tr": "İlk oyun",
+        "en": "First game"
+      },
+      "text": {
+        "tr": "Kısa molalar için, adil ve eğlenceli.",
+        "en": "For short breaks, fair and fun."
+      }
     }
   ]
 }
